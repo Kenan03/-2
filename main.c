@@ -1,52 +1,65 @@
 #include <stdio.h>
-
-    int main() {
-    int a[100];
-    int b[100];
-    int c[200];
-    int n, m;
-    int i,j,k;
-    scanf("%d", & n);
-    for (i = 0; i < n; i++) 
+    void info(int *array1, int *array2, int *array3, int lenght1arr, int lenght2arr)
     {
-        scanf("%d", & a[i]);
-    }
-
-    scanf("%d", & m);
-    for (i = 0; i < m; i++) 
-    {
-        scanf("%d", & b[i]);
-    }
-
-    i = 0;
-    j = 0;
-    for (k = 0; k<m+n; k++) 
-    {
-        if (i > n) 
+        int pointer2 = 0, pointer1 = 0;
+        for (int pointer3 = 0; pointer3 < lenght2arr + lenght1arr; pointer3++)
         {
-            c[k] = b[j];
-            j++;
-        } 
-        else if (j > m) 
-        {
-            c[k] = a[i];
-            i++;
-        } 
-        else if (a[i] >= b[j]) 
-        {
-            c[k] = a[i];
-            i++;
-        } 
-        else 
-        {
-            c[k] = b[j];
-            j++;
+            if (pointer1 > lenght1arr - 1)
+            {
+                array3[pointer3] = array2[pointer2];
+                pointer2++;
+            }
+            else if (pointer2 > lenght2arr - 1)
+            {
+                array3[pointer3] = array1[pointer1];
+                pointer1++;
+            }
+            else if (array1[pointer1] >= array2[pointer2])
+            {
+                array3[pointer3] = array1[pointer1];
+                pointer1++;
+            }
+            else
+            {
+                array3[pointer3] = array2[pointer2];
+                pointer2++;
+            }
         }
     }
-
-    for (i = 0; i < m+n; i++) 
+    int main()
     {
-        printf("%d ", c[i]);
+        int array1[100];
+        int array2[100];
+        int array3[200];
+        int lenght1arr, lenght2arr;
+        int i;
+        printf("lenght 1 array: ");
+        scanf("%d", &lenght1arr);
+        printf("1 array: ");
+        for (i = 0; i < lenght1arr; i++)
+        {
+            scanf("%d", &array1[i]);
+        }
+        printf("lenght 2 array: ");
+        scanf("%d", &lenght2arr);
+        printf("2 array: ");
+        for (i = 0; i < lenght2arr; i++)
+        {
+            scanf("%d", &array2[i]);
+        }
+         if(lenght1arr < 0)
+        {
+            lenght1arr = 0;
+        }
+        if(lenght2arr < 0)
+        {
+            lenght2arr = 0;
+        }
+        info(array1, array2, array3, lenght1arr, lenght2arr);
+        printf("3 array: ");
+        for (int f = 0; f < lenght2arr + lenght1arr; f++)
+        {
+            printf("%d ", array3[f]);
+        }
+        return 0;
     }
-return 0;
-}
